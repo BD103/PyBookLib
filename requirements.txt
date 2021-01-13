@@ -1,5 +1,7 @@
 click
 flask
+colorama
+requests
 black
 flake8
 isort

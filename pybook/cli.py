@@ -1,3 +1,5 @@
+import os
+
 import click
 
 import pybook
@@ -16,13 +18,8 @@ def get(user, project):
     pass
 
 
+# @TODO Update and move cmd
 @cli.command()
 @click.argument("url")
 def set_url(url):
-    pybook.host.set_environ(url)
-
-
-# @TODO: REMOVE
-@cli.command()
-def run():
-    pybook.host.run()
+    pybook.set_environ(url)

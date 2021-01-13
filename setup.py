@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="pybook",
+    name="pybooklib",
     version="1.0",
     author="BD103",
     author_email="dont@stalk.me",
@@ -20,10 +20,10 @@ setuptools.setup(
     install_requires=[
         "click",
         "requests",
-        "colorama ; platform_system=='Windows'",
         "importlib_resources ; python_version<'3.7'",
+        # "colorama ; platform_system=='Windows'",
     ],
     extras_require={"host": ["flask"]},
-    entry_points={"console_scripts": ["pybook=pybook.cli:cli"]},
+    entry_points={"console_scripts": ["pybook=pybook.cli:cli", "pylib=pylib.cli:cli"]},
     python_requires=">=3.8",
 )
