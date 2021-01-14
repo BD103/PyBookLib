@@ -26,5 +26,6 @@ setuptools.setup(
         # "colorama ; platform_system=='Windows'",
     ],
     entry_points={"console_scripts": ["pybook=pybook.cli:cli", "pylib=pylib.cli:cli"]},
+    include_package_data=True,
     python_requires=">=3.8",
 )
