@@ -1,7 +1,8 @@
-import os
-from getch import getch
-import requests
 import json
+import os
+
+import requests
+from getch import getch
 
 
 def init():

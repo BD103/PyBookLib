@@ -1,7 +1,7 @@
+import json
 import os
 
 from flask import Flask, request
-import json
 
 from . import data
 
@@ -12,7 +12,6 @@ except ImportError:
     import importlib_resources as pkg_resources
 
 app = Flask("app")
-app.config["DEBUG"] = True
 
 
 @app.route("/")
