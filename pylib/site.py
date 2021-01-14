@@ -1,6 +1,7 @@
 import os
 
 from flask import Flask, request
+import json
 
 from . import data
 
@@ -11,6 +12,7 @@ except ImportError:
     import importlib_resources as pkg_resources
 
 app = Flask("app")
+app.config["DEBUG"] = True
 
 
 @app.route("/")
@@ -34,7 +36,7 @@ def api():
     elif user not in os.listdir(".library/"):
         return {"type": "UserError", "content": "User is not registered in library."}
     elif book is None:
-        return {"type": "UserBooks", "content": os.listdir(f".library/{user}")}
+        return {"type": "User", "content": os.listdir(f".library/{user}")}
     elif book not in os.listdir(f".library/{user}"):
         return {"type": "BookError", "content": "Book is not registered under user."}
     elif os.listdir(f".library/{user}/{book}") == []:
@@ -42,12 +44,12 @@ def api():
     elif version is None:
         latest = os.listdir(f".library/{user}/{book}")[-1]
         with open(f".library/{user}/{book}/{latest}", "rb") as f:
-            return f.read()
+            return {"type": "Book", "content": f.read()}
     elif fmt_version + ".zip" not in os.listdir(f".library/{user}/{book}"):
         return {"type": "VersionError", "content": "Version specified does not exist."}
     else:
-        with open(f".library/{user}/{book}/{fmt_version}.zip") as f:
-            return f.read()
+        with open(f".library/{user}/{book}/{fmt_version}.zip", "rb") as f:
+            return {"type": "Book", "content": f.read()}
 
 
 def run(host="0.0.0.0", port=8000):

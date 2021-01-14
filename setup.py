@@ -11,7 +11,7 @@ setuptools.setup(
     description="Create, upload, and use Python project templates.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/BD103/PyBook",
+    url="https://github.com/BD103/PyBookLib",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
@@ -20,10 +20,11 @@ setuptools.setup(
     install_requires=[
         "click",
         "requests",
+        "flask",
+        "getch",
         "importlib_resources ; python_version<'3.7'",
         # "colorama ; platform_system=='Windows'",
     ],
-    extras_require={"host": ["flask"]},
     entry_points={"console_scripts": ["pybook=pybook.cli:cli", "pylib=pylib.cli:cli"]},
     python_requires=">=3.8",
 )

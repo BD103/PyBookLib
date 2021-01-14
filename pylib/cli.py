@@ -11,4 +11,5 @@ def cli():
 
 @cli.command()
 def run():
+    "Runs PyLib server"
     pylib.run()
