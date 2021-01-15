@@ -1,5 +1,5 @@
-import platform
+import pybooklib
 
-from .main import get, init, set_environ
+from .main import get, pybook_init
 
-init()
+pybook_init()

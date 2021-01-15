@@ -15,7 +15,7 @@ def make_user(user):
         os.chdir("../")
 
 
-def init(sample=False):
+def pylib_init(sample=False):
     make_lib()
     if sample:
         make_user("BD103")

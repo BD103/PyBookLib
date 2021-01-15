@@ -1,4 +1,6 @@
-from .main import init, make_lib, make_user
+import pybooklib
+
+from .main import make_lib, make_user, pylib_init
 from .site import run
 
-init()
+pylib_init()

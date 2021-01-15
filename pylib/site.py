@@ -1,7 +1,7 @@
 import json
 import os
 
-from flask import Flask, request
+from flask import Flask, request, send_file
 
 from . import data
 
@@ -42,13 +42,11 @@ def api():
         return {"type": "BookError", "content": "Book's contents do not exist."}
     elif version is None:
         latest = os.listdir(f".library/{user}/{book}")[-1]
-        with open(f".library/{user}/{book}/{latest}", "rb") as f:
-            return {"type": "Book", "content": f.read()}
+        return send_file(f".library/{user}/{book}/{latest}")
     elif fmt_version + ".zip" not in os.listdir(f".library/{user}/{book}"):
         return {"type": "VersionError", "content": "Version specified does not exist."}
     else:
-        with open(f".library/{user}/{book}/{fmt_version}.zip", "rb") as f:
-            return {"type": "Book", "content": f.read()}
+        return send_file(f".library/{user}/{book}/{fmt_version}.zip")
 
 
 def run(host="0.0.0.0", port=8000):

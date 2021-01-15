@@ -1,66 +1,75 @@
-import json
 import os
+from zipfile import ZipFile
 
 import requests
-from getch import getch
+from rich.progress import Progress
+from rich.prompt import Prompt
+
+from pybooklib import console
 
 
-def init():
-    if os.getenv("PYBOOK_URL") is None:
-        os.environ["PYBOOK_URL"] = "https://pybooklib.bd103.repl.co/api"
+def pybook_init():
+    if os.getenv("PYLIB_URL") is None:
+        os.environ["PYLIB_URL"] = "https://pybooklib.bd103.repl.co/api"
 
 
-def load(book):
-    pass
+def extract_book(r, direc):
+    with open("tempbook.zip", "wb") as book:
+        book.write(r.content)
+    with ZipFile("tempbook.zip", "r") as book:
+        if direc not in os.listdir():
+            os.mkdir(direc)
+        book.extractall(path=direc)
+    os.remove("tempbook.zip")
 
 
-def gen_pick_book(books, selected):
-    for i in len(books):
-        print("\033[A", end="")
-    for i in len(books):
-        if i == selected:
-            print("\033[37m" + books[i] + "\033[39m")
+def get(user=None, book=None, version=None, direc="."):
+    with Progress() as progress:
+
+        t_request = progress.add_task("Connecting to Server...", total=1, start=False)
+
+        query = os.getenv("PYLIB_URL")
+
+        if user is None:
+            parameters = {}
+        elif book is None:
+            parameters = {"u": user}
+        elif version is None:
+            parameters = {"u": user, "b": book}
         else:
-            print("\033[34m" + books[i] + "\033[39m")
+            parameters = {"u": user, "b": book, "v": version}
 
+        r = requests.get(query, params=parameters)
 
-def pick_book(books):
-    selected = 0
-    picking = True
-    while picking:
-        gen_pick_book(books, selected)
-        key = getch()
-        if key == "\033[A" and selected > 0:
-            selected -= 1
-        elif key == "\033[B" and selected < len(books):
-            selected += 1
-        elif key == "\n":
-            picking = False
-    return books[selected]
+        progress.start_task(t_request)
+        progress.update(t_request, advance=1)
 
-
-def get(user, book, version, dir):
-    if version is None:
-        params = {"u": user, "b": book}
+    if r.headers["Content-Type"] == "application/zip":
+        extract_book(r, direc)
+        console.log("[green]Finished book extraction.[/green]")
+    elif r.headers["Content-Type"] == "application/json":
+        data = r.json()
+        if data["type"] == "User":
+            if data["content"] != []:
+                new_book = Prompt.ask(
+                    "Enter book to download from " + user, choices=data["content"]
+                )
+                get(user, new_book, version=version, direc=direc)
+            else:
+                console.log("[red]BookError: User has no books.[/red]")
+        elif data["type"] == "UserError":
+            console.log("[red]UserError: " + data["content"] + "[/red]")
+        elif data["type"] == "Book":
+            console.log('[red]PyLibError: Returning deprecated "Book" type.[/red]')
+        elif data["type"] == "BookError":
+            console.log("[red]BookError: " + data["content"] + "[/red]")
+        elif data["type"] == "Version":
+            console.log('[red]PyLibError: Returning unused "Version" type.[/red]')
+        elif data["type"] == "VersionError":
+            console.log("[red]VersionError: " + data["content"] + "[/red]")
+        else:
+            console.log("[yellow]PyBookError: Error checking type.")
+            console.log(data)
+        console.log("[green]Finished JSON parse.[/green]")
     else:
-        params = {"u": user, "b": book, "v": version}
-    r = requests.get(os.getenv("PYBOOK_URL"), params=params)
-    response = r.json()
-    if response["type"] == "Book":
-        load(response["content"])
-    elif response["type"] == "BookError":
-        print("BookError:", response["content"])
-    elif response["type"] == "User":
-        pick_book(response["content"])
-    elif response["type"] == "UserError":
-        print("UserError:", response["content"])
-    else:
-        print(
-            "UnknownTypeError: Please open up an issue on Github at github.com/BD103/PyBookLib/issues with the content of stream.txt"
-        )
-        with open("stream.txt", "rt") as stream:
-            print(response, file=stream)
-
-
-def set_environ(url):
-    os.environ["PYBOOK_URL"] = url
+        console.log("[red]Error: Content-Type is not json or zip![/red]")
