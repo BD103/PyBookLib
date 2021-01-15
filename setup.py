@@ -39,7 +39,7 @@ setuptools.setup(
         "importlib_resources ; python_version<'3.7'",
         # "colorama ; platform_system=='Windows'",
     ],
-    entry_points={"console_scripts": ["pybook=pybook.cli:cli", "pylib=pylib.cli:cli"]},
+    entry_points={"console_scripts": ["pybooklib=pybooklib.cli:about","pybook=pybook.cli:cli", "pylib=pylib.cli:cli"]},
     include_package_data=True,
     python_requires=">=3.8",
 )
