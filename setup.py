@@ -13,6 +13,8 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/BD103/PyBookLib",
     packages=setuptools.find_packages(),
+    include_package_data=True,
+    package_data={"": ["data/*.md", "pylib/data/*.html"]}
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Environment :: Web Environment",
@@ -40,6 +42,5 @@ setuptools.setup(
         # "colorama ; platform_system=='Windows'",
     ],
     entry_points={"console_scripts": ["pybooklib=pybooklib.pybooklib_cli:about","pybook=pybooklib.pybook_cli:cli", "pylib=pybooklib.pylib_cli:cli"]},
-    include_package_data=True,
     python_requires=">=3.8",
 )
