@@ -18,7 +18,10 @@ def extract_book(r, direc):
         book.write(r.content)
     with ZipFile("tempbook.zip", "r") as book:
         if direc not in os.listdir():
-            os.mkdir(direc)
+            try:
+              os.mkdir(direc)
+            except FileExistsError:
+              pass
         book.extractall(path=direc)
     os.remove("tempbook.zip")
 
