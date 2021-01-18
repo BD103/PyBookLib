@@ -14,7 +14,7 @@ setuptools.setup(
     url="https://github.com/BD103/PyBookLib",
     packages=setuptools.find_packages(),
     include_package_data=True,
-    package_data={"": ["data/*.md", "pylib/data/*.html"]}
+    package_data={"": ["data/*.md", "pylib/data/*.html"]},
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Environment :: Web Environment",
