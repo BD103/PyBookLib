@@ -1,7 +1,7 @@
 import click
 from pybooklib import console
 from rich.markdown import Markdown
-from . import data
+from pybooklib import data
 try:
     import importlib.resources as pkg_resources
 except ImportError:
