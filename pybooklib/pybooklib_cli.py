@@ -12,6 +12,6 @@ except ImportError:
 
 @click.command()
 def about():
-  "Get information of PyBookLib"
-  text = pkg_resources.read_text(data, "about.md")
-  console.print(Markdown(text))
+    "Get information of PyBookLib"
+    text = pkg_resources.read_text(data, "about.md")
+    console.print(Markdown(text))

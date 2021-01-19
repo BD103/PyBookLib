@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="pybooklib",
-    version="1.1",
+    version="1.2",
     author="BD103",
     author_email="dont@stalk.me",
     description="Create, upload, and use Python project templates.",

@@ -7,8 +7,10 @@ from rich.prompt import Prompt
 
 from pybooklib import console
 
+
 def set_url(url="https://library.bd103.repl.co/api"):
-  os.environ["PYLIB_URL"] = url
+    os.environ["PYLIB_URL"] = url
+
 
 def pybook_init():
     if os.getenv("PYLIB_URL") is None:
