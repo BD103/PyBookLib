@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="pybooklib",
-    version="1.0",
+    version="1.1",
     author="BD103",
     author_email="dont@stalk.me",
     description="Create, upload, and use Python project templates.",
@@ -41,6 +41,12 @@ setuptools.setup(
         "importlib_resources ; python_version<'3.7'",
         # "colorama ; platform_system=='Windows'",
     ],
-    entry_points={"console_scripts": ["pybooklib=pybooklib.pybooklib_cli:about","pybook=pybooklib.pybook_cli:cli", "pylib=pybooklib.pylib_cli:cli"]},
+    entry_points={
+        "console_scripts": [
+            "pybooklib=pybooklib.pybooklib_cli:about",
+            "pybook=pybooklib.pybook_cli:cli",
+            "pylib=pybooklib.pylib_cli:cli",
+        ]
+    },
     python_requires=">=3.8",
 )

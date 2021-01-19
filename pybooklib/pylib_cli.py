@@ -1,6 +1,6 @@
 import click
 
-from pybooklib import pylib
+from pybooklib import pylib, console
 
 
 @click.group()

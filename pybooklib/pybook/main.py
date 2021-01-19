@@ -7,10 +7,12 @@ from rich.prompt import Prompt
 
 from pybooklib import console
 
+def set_url(url="https://library.bd103.repl.co/api"):
+  os.environ["PYLIB_URL"] = url
 
 def pybook_init():
     if os.getenv("PYLIB_URL") is None:
-        os.environ["PYLIB_URL"] = "https://pybooklib.bd103.repl.co/api"
+        set_url()
 
 
 def extract_book(r, direc):
@@ -19,9 +21,9 @@ def extract_book(r, direc):
     with ZipFile("tempbook.zip", "r") as book:
         if direc not in os.listdir():
             try:
-              os.mkdir(direc)
+                os.mkdir(direc)
             except FileExistsError:
-              pass
+                pass
         book.extractall(path=direc)
     os.remove("tempbook.zip")
 
