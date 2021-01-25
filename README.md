@@ -1,4 +1,4 @@
-# About PyBookLib
+# PyBookLib
 
 PyBookLib is a two part library designed to host and get template code projects. It is written for mainly Python programs, but it is possible to host other languages as well. PyBookLib has two submodules, each independant of one another: PyBook and PyLib. PyBookLib has no affiliations with the existing PyPI projects [PyBook](https://pypi.org/project/pybook) and [PyLib](https://pypi.org/project/pylib). It is a completely separated project, and just happened to be library themed. 😁
 
