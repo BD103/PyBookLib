@@ -7,13 +7,13 @@ PyBookLib is a two part library designed to host and get template code projects.
 You can install the package through the following:
 
 ```console
-> pip install -U pybooklib
+pip install -U pybooklib
 ```
 
 If you want the latest development version, which most definitely has bugs, run the following:
 
 ```console
-> pip install git+https://github.com/BD103/PyBookLib
+pip install git+https://github.com/BD103/PyBookLib
 ```
 
 ## Use
@@ -25,7 +25,7 @@ To pull up this markdown file in the console, you can run `pybooklib` in the com
 The main PyBookLib module has no current function beyond a code bridge and displaying this markdown file in the command line.
 
 ```console
-> pybooklib
+pybooklib
 ```
 
 ### PyBook
@@ -49,13 +49,13 @@ You can also run some bash commands:
 
 ```console
 # Get a list of commands
-> pybook --help
-> pybook get-book BD103 sample-library --version 1.2 --direc pylib-library
-> pybook get-user BD103
+pybook --help
+pybook get-book BD103 sample-library --version 1.2 --direc pylib-library
+pybook get-user BD103
 # This should automatically be set to library.bd103.repl.co/api
-> pybook set-url https://link.to.site/api
+pybook set-url https://link.to.site/api
 # Umbrella get function to specify exact details
-> pybook get --user BD103 --direc folder
+pybook get --user BD103 --direc folder
 ```
 You do not have to specify all these parameters. Try removing and replacing some of them and see what happens!
 
@@ -91,7 +91,7 @@ Watch as your server gets hosted.
 
 If you want to contribute to this project, go to [github.com/BD103/PyBookLib](https://github.com/BD103/PyBookLib), create a fork and a pull request. All code should be run through the following commands:
 
-```
+```console
 black pybooklib
 isort pybooklib --profile black
 flake8 pybooklib
