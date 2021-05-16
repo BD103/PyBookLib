@@ -130,4 +130,4 @@ dmypy.json
 
 # Project specific files
 .replit
-.library/
+main.py
