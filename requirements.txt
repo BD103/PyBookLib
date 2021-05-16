@@ -1,8 +1,0 @@
-wheel
-setuptools
-twine
-black
-flake8
-isort
-pytest
--e .
